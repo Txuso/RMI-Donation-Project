@@ -2,12 +2,21 @@ package es.deusto.ingenieria.sd.authentication.server;
 
 import java.rmi.Naming;
 import java.rmi.RMISecurityManager;
-
 import es.deusto.ingenieria.sd.authentication.server.remote.IAuthentication;
 import es.deusto.ingenieria.sd.authentication.server.remote.Authentication;
 
+/**
+ * 
+ * @author Txuso
+ *
+ */
 public class AuthenticationServer {
-
+	/**
+	 * 
+	 * @param args the IP, port and server name
+	 * The Authentication Server will run using an IP address, a port and the server name
+	 * 
+	 */
 	public static void main(String[] args) {
 		if (args.length != 3) {
 			System.exit(0);

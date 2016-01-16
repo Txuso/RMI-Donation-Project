@@ -28,7 +28,7 @@
 	</target>	
     
 	<target name="server" depends="build" description="Runs Server program">
-		<java classname="es.deusto.ingenieria.sd.authentication.server.AuthenticationServer" classpath="${classpath}" fork="true">
+		<java classname="donation.authentication.server.AuthenticationServer" classpath="${classpath}" fork="true">
         	<jvmarg value="-Djava.rmi.server.codebase=file:${build.dir}/"/>
 			<jvmarg value="-Djava.security.policy=${policy.file}"/>			
         	<arg value="${server.IP}"/> 

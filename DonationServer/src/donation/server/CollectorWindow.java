@@ -40,12 +40,12 @@ public class CollectorWindow extends UnicastRemoteObject implements ICollector, 
 			System.setSecurityManager(new RMISecurityManager());
 		}
 
+		System.setProperty("java.rmi.server.hostname","192.168.43.30");
 		final String name = "//" + args[0] + ":" + args[1] + "/" + args[2];
 		System.out.println(" * Server name: " + name);
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					
 					ICollector doncollector = new CollectorWindow();
 					Naming.rebind(name, doncollector);
 				} catch (Exception e) {
@@ -62,7 +62,6 @@ public class CollectorWindow extends UnicastRemoteObject implements ICollector, 
 	public CollectorWindow() throws RemoteException {
 		initialize();
 		this.remoteObservable = new RemoteObservable();
-		LocateRegistry.createRegistry(1090);
 		
 	}
 	

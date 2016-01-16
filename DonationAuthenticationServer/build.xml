@@ -7,7 +7,7 @@
 	<property name="classpath" location="bin"/>
 	<property name="export.file" value="AuthenticationServerAPI.jar"/>
 	<property name="server.port" value="1099"/> 
-	<property name="server.IP" value="127.0.0.1"/> 
+	<property name="server.IP" value="192.168.43.30"/> 
 	<property name="server.name" value="authenticationServer"/>
 	<property name="policy.file" location="security/java.policy"/>	
 

@@ -32,7 +32,8 @@ public class Donor_GUI extends JFrame{
 	String[] Nextargs;
 	public Donor_GUI() {
 		 try {
-			service = (IAuthentication) java.rmi.Naming.lookup("authenticationServer");
+			 System.out.println("here");
+			service = (IAuthentication) java.rmi.Naming.lookup("//192.168.43.251:1099/authenticationServer");
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -2,6 +2,7 @@ package donation.authentication.server;
 
 import java.rmi.Naming;
 import java.rmi.RMISecurityManager;
+import java.rmi.registry.LocateRegistry;
 
 import donation.server.remote.Authentication;
 import donation.server.remote.IAuthentication;
@@ -16,10 +17,13 @@ public class AuthenticationServer {
 		if (System.getSecurityManager() == null) {
 			System.setSecurityManager(new RMISecurityManager());
 		}
+		System.setProperty("java.rmi.server.hostname","192.168.43.30");
+
 
 		String name = "//" + args[0] + ":" + args[1] + "/" + args[2];
 
 		try {
+
 			ApplicationService appService = new ApplicationService();
 			IAuthentication MainServer = new Authentication(appService);
 			Naming.rebind(name, MainServer);

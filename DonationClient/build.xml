@@ -5,7 +5,7 @@
    	<property name="build.dir" location="bin"/>
 	<property name="lib.dir" location="lib"/>
 	<property name="registry.port" value="1099"/> 
-	<property name="registry.IP" value="127.0.0.1"/> 
+	<property name="registry.IP" value="192.168.43.251"/> 
 	<property name="server.Name" value="Collector"/>
 	<property name="policy.file" location="security/java.policy"/>	
 
@@ -32,6 +32,7 @@
         	<arg value="${registry.IP}"/> 
 	 		<arg value="${registry.port}"/> 
 			<arg value="${server.Name}"/> 
+			
         </java>
     </target>
 </project>

@@ -7,7 +7,7 @@
 	<property name="dist.dir" location="dist"/>
 	<property name="export.file" value="Collector.jar"/>	
 	<property name="server.port" value="1099"/> 
-	<property name="server.IP" value="127.0.0.1"/> 
+	<property name="server.IP" value="192.168.43.30"/> 
 	<property name="server.Name" value="Collector"/>
 	<property name="policy.file" location="security/java.policy"/>
 

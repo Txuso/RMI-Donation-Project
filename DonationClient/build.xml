@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<project basedir="." default="help" name="4.4.2_DonationObserver_Client">    
+<project basedir="." default="help" name="DonationClient">    
 	<property environment="env"/>
 	<property name="source.dir" location="src"/>
    	<property name="build.dir" location="bin"/>
@@ -27,7 +27,7 @@
     </target>
     
 	<target name="client" description="Runs Client program">
-		<java classname="donation.service.Donor_GUI" classpathref="classpath" fork="true">
+		<java classname="donation.service.DonorGUI" classpathref="classpath" fork="true">
 			<jvmarg value="-Djava.security.policy=${policy.file}"/>			
         	<arg value="${registry.IP}"/> 
 	 		<arg value="${registry.port}"/> 

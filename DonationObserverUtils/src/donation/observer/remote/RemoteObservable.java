@@ -2,15 +2,15 @@ package donation.observer.remote;
 
 import java.util.ArrayList;
 import java.util.List;
-
-/*
- * INSTRUCTIONS: - The remote server will keep a reference to a RemoteObservable
+	
+/**
+ * The remote server will keep a reference to a RemoteObservable
  * object (this class) to which will delegate every subscription and call when 
  * updates are needed.
- * 
  * The RemoteObservable object will not inherit any remote interface because 
  * it's not a remote object. 
- */	
+ *
+ */
 public class RemoteObservable {
 
 	/**
@@ -42,6 +42,11 @@ public class RemoteObservable {
 		return this.remoteObservers.size();
 	}
 	
+	/**
+	 * 
+	 * @param arg the parameter that will be updated for every observer
+	 * This class will update the donated amount of money for every observer (client)
+	 */
 	public void notifyRemoteObservers(Object arg) {
 		for (IRemoteObserver observer : remoteObservers) {
 			try {

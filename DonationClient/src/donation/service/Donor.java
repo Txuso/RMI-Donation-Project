@@ -15,6 +15,11 @@ import javax.swing.JTextField;
 import donation.remote.ICollector;
 import donation.servive.DonorRemoteObserver;
 
+/**
+ * 
+ *The client's GUI where they will donate money
+ *
+ */
 public class Donor implements ActionListener {
 	private JFrame frame;
 	private JButton buttonEnd;
@@ -22,7 +27,13 @@ public class Donor implements ActionListener {
 	private JTextField donation;
 	private JTextField total;
 	private JLabel message;
+	/**
+	 * the donation server reference
+	 */
 	private ICollector don_collector;
+	/**
+	 * The remote donor instance 
+	 */
 	private DonorRemoteObserver remoteDonor;
 
 	public Donor() {				
@@ -58,8 +69,12 @@ public class Donor implements ActionListener {
 		this.frame.getContentPane().add(this.message, "South");
 		this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.frame.setVisible(true);
+		
+		/**
+		 * We create the needed parameters to start the client
+		 */
 		String[] Nextargs = new String[3];
-		Nextargs [0] = "127.0.0.1"; 
+		Nextargs [0] = "192.168.43.251"; 
 		Nextargs [1] = 	"1099";
 		Nextargs [2] = "Collector";
 		this.start(Nextargs);
@@ -82,15 +97,27 @@ public class Donor implements ActionListener {
 		}
 
 		try {
+			/**
+			 * arg[0] it is the IP address of the server
+			 * arg[1] it is the port of the server
+			 * arg[2] it is the name of the server
+			 * We connect the client to the server
+			 */
 			String URL = "//" + args[0] + ":" + args[1] + "/" + args[2];
 			this.don_collector = (ICollector) Naming.lookup(URL);
 		} catch (Exception e) {
 			System.err.println(" # Error connecting to Donation Collector: " + e.getMessage());
 		}
 	}
-
+	
+	/**
+	 * Buttons actions
+	 */
 	public void actionPerformed(ActionEvent e) {
 		JButton target = (JButton) e.getSource();
+		/**
+		 * if we end the client process the end method will be called
+		 */
 		if (target == this.buttonEnd) {
 			try {
 				this.remoteDonor.end();
@@ -100,7 +127,10 @@ public class Donor implements ActionListener {
 				System.exit(-1);
 			}
 		}
-
+		
+		/**
+		 * When the donate button is pressed the donation is done calling the method from the server
+		 */
 		if (target == this.buttonDonate) {
 			try {
 				int donation = Integer.parseInt(this.donation.getText());
@@ -112,13 +142,23 @@ public class Donor implements ActionListener {
 			}
 		}
 	}
-
+	
+	/**
+	 * 
+	 * @param don the amount of donated money
+	 * this method is called from the DonorRemoteObserver when a donation is done
+	 * It updates the values in the client
+	 */
 	public void notifyTotalAmount(Integer don) {
 		this.message.setText("Receiving total donation amount...");
 		this.total.setText(don.toString());
 		this.message.setText("Total Amount received...");
 	}
-
+	
+	/**
+	 * 
+	 * This method will start the Donor client
+	 */
 	public static void main(String[] args) {
 		if (System.getSecurityManager() == null) {
 			System.setSecurityManager(new RMISecurityManager());

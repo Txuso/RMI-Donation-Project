@@ -7,9 +7,7 @@ import java.awt.event.ActionListener;
 import java.rmi.Naming;
 import java.rmi.RMISecurityManager;
 import java.rmi.RemoteException;
-import java.rmi.registry.LocateRegistry;
 import java.rmi.server.UnicastRemoteObject;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -25,6 +23,10 @@ public class CollectorWindow extends UnicastRemoteObject implements ICollector, 
 
 	private JFrame frame;
 	private static final long serialVersionUID = 1L;
+	/**
+	 * Remote observable method that will allow the server to add and delete observers from the
+	 * subscription list
+	 */
 	private RemoteObservable remoteObservable;
 	private int donations = 0;
 	private JButton buttonEnd;
@@ -39,8 +41,18 @@ public class CollectorWindow extends UnicastRemoteObject implements ICollector, 
 		if (System.getSecurityManager() == null) {
 			System.setSecurityManager(new RMISecurityManager());
 		}
-
-		System.setProperty("java.rmi.server.hostname","192.168.43.30");
+		/**
+		 * 
+		 * Hostname is set so that the client and server can work in different machines
+		 * The server is run
+		 */ 
+		System.setProperty("java.rmi.server.hostname","192.168.43.251");
+		/**
+		 * arg[0] it is the IP address of the server
+		 * arg[1] it is the port of the server
+		 * arg[2] it is the name of the server
+		 * This data is obtained when the server is run. Look at the build.xml
+		 */
 		final String name = "//" + args[0] + ":" + args[1] + "/" + args[2];
 		System.out.println(" * Server name: " + name);
 		EventQueue.invokeLater(new Runnable() {
@@ -56,8 +68,7 @@ public class CollectorWindow extends UnicastRemoteObject implements ICollector, 
 	}
 
 	/**
-	 * Create the application.
-	 * @throws RemoteException 
+	 * We create the remoteObservable instance
 	 */
 	public CollectorWindow() throws RemoteException {
 		initialize();
@@ -107,7 +118,10 @@ public class CollectorWindow extends UnicastRemoteObject implements ICollector, 
 		this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.frame.setVisible(true);
 	}
-
+	
+	/**
+	 * Method that will add an observer to the subscription list
+	 */
 	public void addRemoteObserver(IRemoteObserver observer) {
 		this.remoteObservable.addRemoteObserver(observer);
 		
@@ -117,22 +131,34 @@ public class CollectorWindow extends UnicastRemoteObject implements ICollector, 
 			System.err.println(" # Error subscribing to remote server: " + e.getMessage());
 		}
 	}
-
+	
+	/**
+ 	*  Method that will add an observer to the subscription list
+ 	*/
 	public void deleteRemoteObserver(IRemoteObserver observer) {
 		this.remoteObservable.deleteRemoteObserver(observer);
 	}
-
+	/**
+	 * the method that will update the donated amount and the last donation amount of money
+	 * It calls the notifyTotal method as well
+	 */
 	public synchronized void getDonation(int donation) throws RemoteException {
 		this.donations += donation;
 		this.donation.setText(Integer.toString(donation));
 		this.total.setText(Integer.toString(this.donations));
 		this.notifyTotal(this.donations);
 	}
-
+	/**
+	 * 
+	 * @param total amount of money to be notified to the observers
+	 * This method will update the amount for all the observers
+	 */
 	private void notifyTotal(int total) {
 		this.remoteObservable.notifyRemoteObservers(new Integer(total));
 	}
-
+	/**
+	 * action performed to exit from the server
+	 */
 	public void actionPerformed(ActionEvent e) {
 		JButton target = (JButton)e.getSource();
 		if (target == this.buttonEnd) {

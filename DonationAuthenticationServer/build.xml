@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<project basedir="." default="help" name="Authentication Server">    
+<project basedir="." default="help" name="AuthenticationServer">    
 	<property environment="env"/>
 	<property name="source.dir" location="src"/>
    	<property name="build.dir" location="bin"/>
@@ -7,7 +7,7 @@
 	<property name="classpath" location="bin"/>
 	<property name="export.file" value="AuthenticationServerAPI.jar"/>
 	<property name="server.port" value="1099"/> 
-	<property name="server.IP" value="192.168.43.30"/> 
+	<property name="server.IP" value="192.168.43.251"/> 
 	<property name="server.name" value="authenticationServer"/>
 	<property name="policy.file" location="security/java.policy"/>	
 
@@ -37,3 +37,6 @@
         </java>
     </target>
 </project>
+
+
+

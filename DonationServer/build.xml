@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<project basedir="." default="help" name="4.4.2_DonationObserver_Server">    
+<project basedir="." default="help" name="DonationServer">    
 	<property environment="env"/>
 	<property name="source.dir" location="src"/>
    	<property name="build.dir" location="bin"/>
@@ -7,7 +7,7 @@
 	<property name="dist.dir" location="dist"/>
 	<property name="export.file" value="Collector.jar"/>	
 	<property name="server.port" value="1099"/> 
-	<property name="server.IP" value="192.168.43.30"/> 
+	<property name="server.IP" value="192.168.43.251"/> 
 	<property name="server.Name" value="Collector"/>
 	<property name="policy.file" location="security/java.policy"/>
 

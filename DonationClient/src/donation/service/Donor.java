@@ -133,10 +133,16 @@ public class Donor implements ActionListener {
 		 */
 		if (target == this.buttonDonate) {
 			try {
+				
 				int donation = Integer.parseInt(this.donation.getText());
-				this.message.setText("Sending donation ...");
-				this.don_collector.getDonation(donation);
-				this.message.setText("Donation of " + donation + " already sent...");
+				if (donation > 0){
+					this.message.setText("Sending donation ...");
+					this.don_collector.getDonation(donation);
+					this.message.setText("Donation of " + donation + " already sent...");
+				}
+				else
+					this.message.setText(" # You cannot steal the money.");
+
 			} catch (Exception exc) {
 				this.message.setText(" # Error sending donation.");
 			}
